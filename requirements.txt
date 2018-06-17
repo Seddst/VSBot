@@ -1,1 +1,8 @@
 gunicorn==19.7.1
+matplotlib
+Flask
+PyMySQL
+python-telegram-bot
+requests
+SQLAlchemy
+pandas
