@@ -13,38 +13,38 @@ from telegram.ext.dispatcher import run_async
 from telegram.error import TelegramError
 
 from config import TOKEN
-from VSBot.core.chat_commands import CC_SET_WELCOME, CC_HELP, CC_SHOW_WELCOME, CC_TURN_ON_WELCOME, \
+from core.chat_commands import CC_SET_WELCOME, CC_HELP, CC_SHOW_WELCOME, CC_TURN_ON_WELCOME, \
     CC_TURN_OFF_WELCOME, CC_SET_TRIGGER, CC_UNSET_TRIGGER, CC_TRIGGER_LIST, CC_ADMIN_LIST, CC_PING, \
     CC_ALLOW_TRIGGER_ALL, CC_DISALLOW_TRIGGER_ALL, CC_ADMINS, \
     CC_ALLOW_PIN_ALL, CC_DISALLOW_PIN_ALL, \
     CC_PIN, CC_SILENT_PIN, CC_DELETE, CC_KICK
 
 
-from VSBot.core.functions.admins import (
+from core.functions.admins import (
     list_admins, admins_for_users, set_admin
 )
-from VSBot.core.functions.ban import unban, ban
+from core.functions.ban import unban, ban
 
 
-from VSBot.core.functions.common import (
+from core.functions.common import (
     help_msg, ping, error,
     delete_msg, delete_user)
 
 
-from VSBot.core.functions.pin import pin, not_pin_all, pin_all, silent_pin
+from core.functions.pin import pin, not_pin_all, pin_all, silent_pin
 
-from VSBot.core.functions.triggers import (
+from core.functions.triggers import (
     set_trigger, add_trigger, del_trigger, list_triggers, enable_trigger_all,
     disable_trigger_all, trigger_show,
     set_global_trigger, add_global_trigger, del_global_trigger
 )
-from VSBot.core.functions.welcome import (
+from core.functions.welcome import (
     welcome, set_welcome, show_welcome, enable_welcome, disable_welcome
 )
 
 
-from VSBot.core.types import Admin, user_allowed, User
-from VSBot.core.utils import add_user
+from core.types import Admin, user_allowed, User
+from core.utils import add_user
 
 # -----constants----
 VSMAIN_ID = 591505188
