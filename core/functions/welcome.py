@@ -1,11 +1,11 @@
 from telegram import Update, Bot
-from VSBot.core.types import Wellcomed, WelcomeMsg, admin_allowed, Admin, user_allowed
-from VSBot.core.template import fill_template
+from core.types import Wellcomed, WelcomeMsg, admin_allowed, Admin, user_allowed
+from core.template import fill_template
 from time import time
-from VSBot.core.utils import send_async, add_user, update_group
-from VSBot.core.functions.newbies import newbie
-from VSBot.core.texts import *
-from VSBot.config import Venture_CHAT_ID, ACADEM_CHAT_ID
+from core.utils import send_async, add_user, update_group
+from core.functions.newbies import newbie
+from core.texts import *
+from config import Venture_CHAT_ID, ACADEM_CHAT_ID
 
 # Admintype needs to be replaced academ chat too?
 
