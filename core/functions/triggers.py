@@ -1,7 +1,7 @@
 from telegram import Update, Bot, Message, ParseMode
-from VSBot.core.types import Trigger, Admin, admin_allowed, MessageType, LocalTrigger, user_allowed, check_admin
-from VSBot.core.utils import send_async, update_group
-from VSBot.core.texts import *
+from core.types import Trigger, Admin, admin_allowed, MessageType, LocalTrigger, user_allowed, check_admin
+from core.utils import send_async, update_group
+from core.texts import *
 from json import loads
 
 # adminTypes need to be changed universally to just admin or something like admin_allowed
