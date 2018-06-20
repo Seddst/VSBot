@@ -12,7 +12,7 @@ from telegram.ext import (
 from telegram.ext.dispatcher import run_async
 from telegram.error import TelegramError
 
-from VSBot.config import TOKEN
+from config import TOKEN
 from VSBot.core.chat_commands import CC_SET_WELCOME, CC_HELP, CC_SHOW_WELCOME, CC_TURN_ON_WELCOME, \
     CC_TURN_OFF_WELCOME, CC_SET_TRIGGER, CC_UNSET_TRIGGER, CC_TRIGGER_LIST, CC_ADMIN_LIST, CC_PING, \
     CC_ALLOW_TRIGGER_ALL, CC_DISALLOW_TRIGGER_ALL, CC_ADMINS, \
