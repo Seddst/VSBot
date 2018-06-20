@@ -1,8 +1,8 @@
 from telegram import Bot, Update
 
-from VSBot.core.texts import MSG_PIN_ALL_ENABLED, MSG_PIN_ALL_DISABLED
-from VSBot.core.types import Admin, admin_allowed, user_allowed, check_admin
-from VSBot.core.utils import update_group, send_async
+from core.texts import MSG_PIN_ALL_ENABLED, MSG_PIN_ALL_DISABLED
+from core.types import Admin, admin_allowed, user_allowed, check_admin
+from core.utils import update_group, send_async
 
 # adminTypes need a new name
 
