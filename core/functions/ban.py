@@ -1,10 +1,10 @@
 from datetime import datetime
 
 from telegram import Bot, Update
-from VSBot.core.texts import MSG_USER_UNKNOWN, MSG_ALREADY_BANNED, \
+from core.texts import MSG_USER_UNKNOWN, MSG_ALREADY_BANNED, \
     MSG_USER_NOT_BANNED, MSG_USER_UNBANNED, MSG_YOU_UNBANNED, MSG_NO_REASON, MSG_REASON_TRAITOR
-from VSBot.core.types import admin_allowed, Ban, User, Admin
-from VSBot.core.utils import send_async
+from core.types import admin_allowed, Ban, User, Admin
+from core.utils import send_async
 
 
 @admin_allowed()
