@@ -1,12 +1,12 @@
 # from core.texts import *
-from VSBot.core.texts import (
+from core.texts import (
     MSG_USER_UNKNOWN, MSG_NEW_GROUP_ADMIN, MSG_DEL_GROUP_ADMIN,
     MSG_NEW_GROUP_ADMIN_EXISTS, MSG_DEL_GROUP_ADMIN_NOT_EXIST,
     MSG_LIST_ADMINS_HEADER, MSG_LIST_ADMINS_FORMAT,
     MSG_EMPTY, MSG_LIST_ADMINS_USER_FORMAT,
     )
-from VSBot.core.types import User, AdminType, Admin, admin_allowed, user_allowed
-from VSBot.core.utils import send_async
+from core.types import User, AdminType, Admin, admin_allowed, user_allowed
+from core.utils import send_async
 
 
 @admin_allowed()
