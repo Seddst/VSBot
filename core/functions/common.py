@@ -3,13 +3,13 @@ import logging
 
 from telegram import Update, Bot, ParseMode
 
-from VSBot.core.functions.triggers import trigger_decorator
+from core.functions.triggers import trigger_decorator
 
-from VSBot.core.texts import *
-from VSBot.core.types import Admin, admin_allowed, user_allowed, Auth
-from VSBot.core.utils import send_async, add_user
+from core.texts import *
+from core.types import Admin, admin_allowed, user_allowed, Auth
+from core.utils import send_async, add_user
 
-from VSBot.config import WEB_LINK
+from config import WEB_LINK
 
 
 # change adminType
