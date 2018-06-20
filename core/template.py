@@ -1,4 +1,4 @@
-from VSBot.core.types import User
+from core.types import User
 
 
 def fill_template(msg: str, user: User):
