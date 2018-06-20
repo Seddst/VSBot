@@ -14,7 +14,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from telegram import Bot
 
-from VSBot.config import DB
+from config import DB
 
 
 class MessageType(Enum):
