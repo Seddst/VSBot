@@ -4,7 +4,7 @@ from telegram import Bot
 from telegram.error import TelegramError
 from telegram.ext.dispatcher import run_async
 
-from VSBot.core.types import Session, User, Group
+from core.types import Session, User, Group
 
 
 @run_async
