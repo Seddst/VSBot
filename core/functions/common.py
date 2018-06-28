@@ -51,7 +51,7 @@ def user_panel(bot: Bot, update: Update, session):
             is_admin = True
             break
         send_async(bot, chat_id=update.message.chat.id, text=MSG_START_WELCOME, parse_mode=ParseMode.HTML,
-                   reply_markup=generate_user_markup(is_admin)
+                   reply_markup=generate_user_markup(is_admin))
 
         
 @admin_allowed()
