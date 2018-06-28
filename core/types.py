@@ -168,7 +168,7 @@ def log(session, user_id, chat_id, func_name, args):
         session.commit()
 
 
-def admin_allowed(adm_type=AdminType.Full, ban_enable=True):
+def admin_allowed(adm_type=AdminType.FULL, ban_enable=True):
     def decorate(func):
         def wrapper(bot: Bot, update, *args, **kwargs):
             session = Session()
