@@ -28,8 +28,32 @@ def start(bot: Bot, update: Update, session):
     add_user(update.message.from_user, session)
     if update.message.chat.type == 'private':
         send_async(bot, chat_id=update.message.chat.id, text=MSG_START_WELCOME, parse_mode=ParseMode.HTML)
+        
+        
+@admin_allowed(adm_type=AdminType.GROUP)
+def admin_panel(bot: Bot, update: Update, session):
+    if update.message.chat.type == 'private':
+        admin = session.query(Admin).filter_by(user_id=update.message.from_user.id).all()
+        full_adm = False
+        for adm in admin:
+            if adm.admin_type <= AdminType.FULL.value:
+                full_adm = True
+        send_async(bot, chat_id=update.message.chat.id, text=MSG_ADMIN_WELCOME,
+                   reply_markup=generate_admin_markup(full_adm))
+        
+        
+@user_allowed
+def user_panel(bot: Bot, update: Update, session):
+    if update.message.chat.type == 'private':
+        admin = session.query(Admin).filter_by(user_id=update.message.from_user.id).all()
+        is_admin = False
+        for _ in admin:
+            is_admin = True
+            break
+        send_async(bot, chat_id=update.message.chat.id, text=MSG_START_WELCOME, parse_mode=ParseMode.HTML,
+                   reply_markup=generate_user_markup(is_admin)
 
-
+        
 @admin_allowed()
 def kick(bot: Bot, update: Update):
     bot.leave_chat(update.message.chat.id)
