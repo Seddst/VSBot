@@ -140,7 +140,7 @@ class Auth(Base):
 
 def check_admin(update,session,adm_type):
     allowed = False
-    if adm_type == Admin.NOT_ADMIN:
+    if adm_type == AdminType.NOT_ADMIN:
         allowed = True
     else:
         admins = session.query(Admin).filter_by(user_id= update.message.from_user.id).all()
@@ -168,7 +168,7 @@ def log(session, user_id, chat_id, func_name, args):
         session.commit()
 
 
-def admin_allowed(adm_type=Admin, ban_enable=True):
+def admin_allowed(adm_type=AdminType.Full, ban_enable=True):
     def decorate(func):
         def wrapper(bot: Bot, update, *args, **kwargs):
             session = Session()
@@ -191,10 +191,10 @@ def admin_allowed(adm_type=Admin, ban_enable=True):
 
 def user_allowed(ban_enable=True):
     if callable(ban_enable):
-        return admin_allowed(Admin.NOT_ADMIN)(ban_enable)
+        return admin_allowed(AdminType.NOT_ADMIN)(ban_enable)
     else:
         def wrap(func):
-            return admin_allowed(Admin.NOT_ADMIN, ban_enable)(func)
+            return admin_allowed(AdminType.NOT_ADMIN, ban_enable)(func)
     return wrap
 
 
