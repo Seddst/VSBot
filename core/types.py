@@ -17,9 +17,9 @@ from telegram import Bot
 from config import DB
 
 class AdminType(Enum):
-    Super = 0
-    Full = 1
-    Group = 2
+    SUPER = 0
+    FULL = 1
+    GROUP = 2
     
     NOT_ADMIN = 100
 
