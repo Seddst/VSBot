@@ -16,6 +16,12 @@ from telegram import Bot
 
 from config import DB
 
+class AdminType(Enum):
+    Super = 0
+    Full = 1
+    Group = 2
+    
+    Not_Admin = 100
 
 class MessageType(Enum):
     TEXT = 0
