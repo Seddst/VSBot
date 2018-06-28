@@ -1,5 +1,5 @@
 from telegram import Update, Bot, Message, ParseMode
-from core.types import Trigger, Admin, admin_allowed, MessageType, LocalTrigger, user_allowed, check_admin
+from core.types import Trigger, AdminType, admin_allowed, MessageType, LocalTrigger, user_allowed, check_admin
 from core.utils import send_async, update_group
 from core.texts import *
 from json import loads
@@ -12,10 +12,10 @@ def trigger_decorator(func):
     def wrapper(bot, update, session, *args, **kwargs):
         group = update_group(update.message.chat, session)
         if group is None and \
-                check_admin(update, session, Admin.FULL) or \
+                check_admin(update, session, AdminType.FULL) or \
                 group is not None and \
                 (group.allow_trigger_all or
-                 check_admin(update, session, Admin.GROUP)):
+                 check_admin(update, session, AdminType.GROUP)):
             func(bot, update, session, *args, **kwargs)
     return wrapper
 
@@ -128,7 +128,7 @@ def trigger_show(bot: Bot, update: Update, session):
             send_async(bot, chat_id=update.message.chat.id, text=trigger.message, disable_web_page_preview=True)
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def enable_global_trigger_all(bot: Bot, update: Update, session):
     group = update_group(update.message.chat, session)
     group.allow_trigger_all = True
@@ -137,7 +137,7 @@ def enable_global_trigger_all(bot: Bot, update: Update, session):
     send_async(bot, chat_id=update.message.chat.id, text=MSG_TRIGGER_ALL_ENABLED)
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def disable_global_trigger_all(bot: Bot, update: Update, session):
     group = update_group(update.message.chat, session)
     group.allow_trigger_all = False
@@ -208,7 +208,7 @@ def add_trigger_db(msg: Message, chat, trigger_text: str, session):
     session.commit()
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def set_trigger(bot: Bot, update: Update, session):
     msg = update.message.text.split(' ', 1)
     if len(msg) == 2 and len(msg[1]) > 0 and update.message.reply_to_message:
@@ -220,7 +220,7 @@ def set_trigger(bot: Bot, update: Update, session):
         send_async(bot, chat_id=update.message.chat.id, text=MSG_TRIGGER_NEW_ERROR)
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def add_trigger(bot: Bot, update: Update, session):
     msg = update.message.text.split(' ', 1)
     if len(msg) == 2 and len(msg[1]) > 0 and update.message.reply_to_message:
@@ -236,7 +236,7 @@ def add_trigger(bot: Bot, update: Update, session):
         send_async(bot, chat_id=update.message.chat.id, text=MSG_TRIGGER_NEW_ERROR)
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def enable_trigger_all(bot: Bot, update: Update, session):
     group = update_group(update.message.chat, session)
     group.allow_trigger_all = True
@@ -245,7 +245,7 @@ def enable_trigger_all(bot: Bot, update: Update, session):
     send_async(bot, chat_id=update.message.chat.id, text=MSG_TRIGGER_ALL_ENABLED)
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def disable_trigger_all(bot: Bot, update: Update, session):
     group = update_group(update.message.chat, session)
     group.allow_trigger_all = False
@@ -254,7 +254,7 @@ def disable_trigger_all(bot: Bot, update: Update, session):
     send_async(bot, chat_id=update.message.chat.id, text=MSG_TRIGGER_ALL_DISABLED)
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def del_trigger(bot: Bot, update: Update, session):
     msg = update.message.text.split(' ', 1)[1]
     trigger = session.query(LocalTrigger).filter_by(trigger=msg).first()
