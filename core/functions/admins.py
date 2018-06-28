@@ -1,3 +1,4 @@
+from telegram import Update, Bot
 # from core.texts import *
 from core.texts import (
     MSG_USER_UNKNOWN, MSG_NEW_GROUP_ADMIN, MSG_DEL_GROUP_ADMIN,
