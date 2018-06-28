@@ -6,7 +6,7 @@ from telegram import Update, Bot, ParseMode
 from core.functions.triggers import trigger_decorator
 
 from core.texts import *
-from core.types import Admin, admin_allowed, user_allowed, Auth
+from core.types import AdminType, admin_allowed, user_allowed, Auth
 from core.utils import send_async, add_user
 
 from config import WEB_LINK
@@ -51,12 +51,12 @@ def help_msg(bot:Bot, update, session):
         send_async(bot, chat_id=update.message.chat.id, text=MSG_HELP_USER)
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def ping(bot: Bot, update: Update):
     send_async(bot, chat_id=update.message.chat.id, text=MSG_PING.format(update.message.from_user.username))
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def delete_msg(bot: Bot, update: Update):
     bot.delete_message(update.message.reply_to_message.chat_id, update.message.reply_to_message.message_id)
     bot.delete_message(update.message.reply_to_message.chat_id, update.message.message_id)
