@@ -1,7 +1,7 @@
 from telegram import Bot, Update
 
 from core.texts import MSG_PIN_ALL_ENABLED, MSG_PIN_ALL_DISABLED
-from core.types import Admin, admin_allowed, user_allowed, check_admin
+from core.types import AdminType, admin_allowed, user_allowed, check_admin
 from core.utils import update_group, send_async
 
 # adminTypes need a new name
@@ -12,10 +12,10 @@ def pin_decorator(func):
     def wrapper(bot, update, session, *args, **kwargs):
         group = update_group(update.message.chat, session)
         if group is None and \
-                check_admin(update, session, Admin.FULL) or \
+                check_admin(update, session, AdminType.FULL) or \
                 group is not None and \
                 (group.allow_pin_all or
-                 check_admin(update, session, Admin.GROUP)):
+                 check_admin(update, session, AdminType.GROUP)):
             func(bot, update, session, *args, **kwargs)
 
     return wrapper
@@ -37,7 +37,7 @@ def silent_pin(bot: Bot, update: Update):
                       'disable_notification': True})
 
 
-@admin_allowed(Admin.GROUP)
+@admin_allowed(AdminType.GROUP)
 def pin_all(bot: Bot, update: Update, session):
     group = update_group(update.message.chat, session)
     if not group.allow_pin_all:
@@ -47,7 +47,7 @@ def pin_all(bot: Bot, update: Update, session):
     send_async(bot, chat_id=update.message.chat.id, text=MSG_PIN_ALL_ENABLED)
 
 
-@admin_allowed(Admin.GROUP)
+@admin_allowed(AdminType.GROUP)
 def not_pin_all(bot: Bot, update: Update, session):
     group = update_group(update.message.chat, session)
     if group.allow_pin_all:
