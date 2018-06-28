@@ -21,7 +21,7 @@ class AdminType(Enum):
     Full = 1
     Group = 2
     
-    Not_Admin = 100
+    NOT_ADMIN = 100
 
 class MessageType(Enum):
     TEXT = 0
