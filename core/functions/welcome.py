@@ -1,5 +1,5 @@
 from telegram import Update, Bot
-from core.types import Wellcomed, WelcomeMsg, admin_allowed, Admin, user_allowed
+from core.types import Wellcomed, WelcomeMsg, AdminType, admin_allowed, Admin, user_allowed
 from core.template import fill_template
 from time import time
 from core.utils import send_async, add_user, update_group
@@ -50,7 +50,7 @@ def welcome(bot: Bot, update: Update, session):
                     session.commit()
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def set_welcome(bot: Bot, update: Update, session):
     if update.message.chat.type in ['group']:
         group = update_group(update.message.chat, session)
@@ -64,7 +64,7 @@ def set_welcome(bot: Bot, update: Update, session):
         send_async(bot, chat_id=update.message.chat.id, text=MSG_WELCOME_SET)
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def enable_welcome(bot: Bot, update: Update, session):
     if update.message.chat.type in ['group']:
         group = update_group(update.message.chat, session)
@@ -74,7 +74,7 @@ def enable_welcome(bot: Bot, update: Update, session):
         send_async(bot, chat_id=update.message.chat.id, text=MSG_WELCOME_ENABLED)
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def disable_welcome(bot: Bot, update: Update, session):
     if update.message.chat.type in ['group']:
         group = update_group(update.message.chat, session)
@@ -84,7 +84,7 @@ def disable_welcome(bot: Bot, update: Update, session):
         send_async(bot, chat_id=update.message.chat.id, text=MSG_WELCOME_DISABLED)
 
 
-@admin_allowed(adm_type=Admin.GROUP)
+@admin_allowed(adm_type=AdminType.GROUP)
 def show_welcome(bot: Bot, update, session):
     if update.message.chat.type in ['group']:
         group = update_group(update.message.chat, session)
