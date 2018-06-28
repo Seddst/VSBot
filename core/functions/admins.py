@@ -5,7 +5,7 @@ from core.texts import (
     MSG_LIST_ADMINS_HEADER, MSG_LIST_ADMINS_FORMAT,
     MSG_EMPTY, MSG_LIST_ADMINS_USER_FORMAT,
     )
-from core.types import User, AdminType, Admin, admin_allowed, user_allowed
+from core.types import User, Admin, admin_allowed, user_allowed
 from core.utils import send_async
 
 
