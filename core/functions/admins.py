@@ -7,7 +7,7 @@ from core.texts import (
     MSG_LIST_ADMINS_HEADER, MSG_LIST_ADMINS_FORMAT,
     MSG_EMPTY, MSG_LIST_ADMINS_USER_FORMAT,
     )
-from core.types import User, Admin, admin_allowed, user_allowed
+from core.types import User, AdminType, Admin, admin_allowed, user_allowed
 from core.utils import send_async
 
 
@@ -28,7 +28,7 @@ def set_admin(bot: Bot, update: Update, session):
 
             if adm is None:
                 new_group_admin = Admin(user_id=user.id,
-                                        admin_type=Admin.GROUP.value,
+                                        admin_type=AdminType.GROUP.value,
                                         admin_group=update.message.chat.id)
 
                 session.add(new_group_admin)
