@@ -150,8 +150,8 @@ def main():
     # on different commands - answer in Telegram
     # disp.add_handler(CommandHandler("test", ready_to_battle_result))
 
-    disp.add_handler(CommandHandler("start"))
-    disp.add_handler(CommandHandler("admin"))
+    disp.add_handler(CommandHandler("start", user_panel ))
+    disp.add_handler(CommandHandler("admin", admin_panel))
     disp.add_handler(CommandHandler("help", help_msg))
     disp.add_handler(CommandHandler("ping", ping))
     disp.add_handler(CommandHandler("set_global_trigger", set_global_trigger))
