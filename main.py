@@ -27,8 +27,8 @@ from core.functions.ban import unban, ban
 
 
 from core.functions.common import (
-    help_msg, ping, error,
-    delete_msg, delete_user)
+    help_msg, ping, start, error, kick, admin_panel,
+    delete_msg, delete_user, user_panel, web_auth)
 
 
 from core.functions.pin import pin, not_pin_all, pin_all, silent_pin
