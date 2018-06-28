@@ -1,6 +1,6 @@
 # finish this later
 TOKEN = '<618668131:AAG57FawPhzS5FEBsyGRsSZ1aIxbh871Ei0>'  # token telegram (is obtained from @BotFather)
-DB= 'mysql://ndceo8242qg0i5md:gt5jw4zmvw5ojpcp@o677vxfi8ok6exrd.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/gu6d4411p51bbdfk'
+DB= 'mysql+pymysql://ndceo8242qg0i5md:gt5jw4zmvw5ojpcp@o677vxfi8ok6exrd.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/gu6d4411p51bbdfk'
 # string (only supported by MySql, you can read about the format here
 # http://docs.sqlalchemy.org/en/latest/dialects/mysql.html)
 API_PORT = 3306  # Port, on which external api is available (REST)
