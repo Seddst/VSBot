@@ -5,7 +5,7 @@ from time import time
 from core.utils import send_async, add_user, update_group
 from core.functions.newbies import newbie
 from core.texts import *
-from config import Venture_CHAT_ID, ACADEM_CHAT_ID
+from config import Venture_CHAT_ID
 
 # Admintype needs to be replaced academ chat too?
 
@@ -24,7 +24,7 @@ def welcome(bot: Bot, update: Update, session):
             print(user)
             print(update.message.chat.id)
             print(Venture_CHAT_ID == update.message.chat.id)
-            if str(update.message.chat.id) == Venture_CHAT_ID or str(update.message.chat.id) == ACADEM_CHAT_ID:
+            if str(update.message.chat.id) == Venture_CHAT_ID:
                 print('equal')
                 if group.welcome_enabled:
                     print('enable_welcome')
