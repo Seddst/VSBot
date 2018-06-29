@@ -44,7 +44,7 @@ def admin_panel(bot: Bot, update: Update, session):
         
 @user_allowed
 def user_panel(bot: Bot, update: Update, session):
-    if update.message.chat.type == 'private':
+    if update.message.chat.type == ['private', 'group']:
         admin = session.query(Admin).filter_by(user_id=update.message.from_user.id).all()
         is_admin = False
         for _ in admin:
