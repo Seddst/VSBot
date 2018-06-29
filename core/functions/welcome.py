@@ -1,5 +1,5 @@
 from telegram import Update, Bot
-from core.types import Wellcomed, WelcomeMsg, AdminType, admin_allowed, Admin, user_allowed
+from core.types import Wellcomed, WelcomeMsg, AdminType, admin_allowed, user_allowed
 from core.template import fill_template
 from time import time
 from core.utils import send_async, add_user, update_group
