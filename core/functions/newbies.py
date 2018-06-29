@@ -3,7 +3,7 @@ from core.types import User, Group, user_allowed
 from core.template import fill_template
 from core.utils import send_async
 from core.texts import *
-from config import ACADEM_CHAT_ID, Venture_CHAT_ID
+from config import Venture_CHAT_ID
 
 # fix academ chat we're not using it
 
