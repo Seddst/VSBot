@@ -8,7 +8,7 @@ GOVERNMENT_CHAT = 591505188  # Chat in which the bot will sent reports (current 
 #  but isn't being used in main)
 SUPER_ADMIN_ID = 0  # id супер админа
 # functional recruiting:
-Venture_CHAT_ID = 618668131  # id chateau chat (to find new players in the castle - if None - functional is disabled)
+VENTURE_CHAT_ID = 618668131  # id chateau chat (to find new players in the castle - if None - functional is disabled)
 ACADEM_CHAT_ID = None  # id chat academy (for notification of new players in the castle- if None -
 # functional is disabled)
 CRYSTALBALL = None  # flag of the castle, which you want to serve (for example '🇮🇲'),
