@@ -6,7 +6,7 @@ from telegram import Update, Bot, ParseMode
 from core.functions.triggers import trigger_decorator
 
 from core.texts import *
-from core.types import AdminType, admin_allowed, user_allowed, Auth
+from core.types import AdminType, Admin, admin_allowed, user_allowed, Auth
 from core.utils import send_async, add_user
 
 from config import WEB_LINK
