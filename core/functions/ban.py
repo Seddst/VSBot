@@ -2,7 +2,8 @@ from datetime import datetime
 
 from telegram import Bot, Update
 from core.texts import MSG_USER_UNKNOWN, MSG_ALREADY_BANNED, \
-    MSG_USER_NOT_BANNED, MSG_USER_UNBANNED, MSG_YOU_UNBANNED, MSG_NO_REASON
+    MSG_USER_NOT_BANNED, MSG_USER_UNBANNED, MSG_YOU_UNBANNED, MSG_NO_REASON, MSG_YOU_BANNED, \
+    MSG_BAN_COMPLETE
 from core.types import admin_allowed, Ban, User, Admin
 from core.utils import send_async
 
@@ -31,6 +32,8 @@ def ban(bot: Bot, update: Update, session):
                 session.delete(admin)
             session.add(banned)
             session.commit()
+            send_async(bot, chat_id=user.id, text=MSG_YOU_BANNED.format(banned.reason))
+            send_async(bot, chat_id=update.message.chat.id, text=MSG_BAN_COMPLETE)
 
     else:
         send_async(bot, chat_id=update.message.chat.id, text=MSG_USER_UNKNOWN)
