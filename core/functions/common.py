@@ -39,7 +39,7 @@ def admin_panel(bot: Bot, update: Update, session):
             if adm.admin_type <= AdminType.FULL.value:
                 full_adm = True
         send_async(bot, chat_id=update.message.chat.id, text=MSG_ADMIN_WELCOME,
-                   reply_markup=generate_admin_markup(full_adm))
+                   reply_markup=full_adm)
         
         
 @user_allowed
@@ -51,7 +51,7 @@ def user_panel(bot: Bot, update: Update, session):
             is_admin = True
             break
         send_async(bot, chat_id=update.message.chat.id, text=MSG_START_WELCOME, parse_mode=ParseMode.HTML,
-                   reply_markup=generate_user_markup(is_admin))
+                   reply_markup=is_admin)
 
         
 @admin_allowed()
