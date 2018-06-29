@@ -70,7 +70,7 @@ def del_msg(bot, job):
 def manage_all(bot: Bot, update: Update, session, chat_data):
     add_user(update.message.from_user, session)
 
-    session.query(User).filter_by(id=update.message.from_user.id).first()
+    user = session.query(User).filter_by(id=update.message.from_user.id).first()
 
     if update.message.chat.type in ['group', 'channel']:
 
@@ -78,9 +78,6 @@ def manage_all(bot: Bot, update: Update, session, chat_data):
             Admin.user_id == update.message.from_user.id and
             Admin.admin_group in [update.message.chat.id, 0]).first()
 
-        if admin is None:
-            bot.delete_message(update.message.chat.id,
-                               update.message.message_id)
         if not update.message.text:
             return
 
