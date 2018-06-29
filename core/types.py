@@ -144,6 +144,18 @@ def check_admin(update,session,adm_type):
         allowed = True
     else:
         admins = session.query(Admin).filter_by(user_id= update.message.from_user.id).all()
+        for adm in admins:
+            if (AdminType(adm.admin_type) in allowed_types or adm.admin_type <= adm_type.value) and \
+                    (adm.admin_group in [0, update.message.chat.id] or
+                     update.message.chat.id == update.message.from_user.id):
+                if adm.admin_group != 0:
+                    group = session.query(Group).filter_by(id=adm.admin_group).first()
+                    if group and group.bot_in_group:
+                        allowed = True
+                        break
+                else:
+                    allowed = True
+                    break
     return allowed
 
 
