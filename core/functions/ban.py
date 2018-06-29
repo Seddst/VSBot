@@ -2,7 +2,7 @@ from datetime import datetime
 
 from telegram import Bot, Update
 from core.texts import MSG_USER_UNKNOWN, MSG_ALREADY_BANNED, \
-    MSG_USER_NOT_BANNED, MSG_USER_UNBANNED, MSG_YOU_UNBANNED, MSG_NO_REASON, MSG_REASON_TRAITOR
+    MSG_USER_NOT_BANNED, MSG_USER_UNBANNED, MSG_YOU_UNBANNED, MSG_NO_REASON
 from core.types import admin_allowed, Ban, User, Admin
 from core.utils import send_async
 
