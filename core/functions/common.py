@@ -26,13 +26,13 @@ def error(error):
 @user_allowed
 def start(bot: Bot, update: Update, session):
     add_user(update.message.from_user, session)
-    if update.message.chat.type == 'private':
+    if update.message.chat.type == ['private', 'group']:
         send_async(bot, chat_id=update.message.chat.id, text=MSG_START_WELCOME, parse_mode=ParseMode.HTML)
         
         
 @admin_allowed(adm_type=AdminType.GROUP)
 def admin_panel(bot: Bot, update: Update, session):
-    if update.message.chat.type == 'private':
+    if update.message.chat.type == ['private', 'group']:
         admin = session.query(Admin).filter_by(user_id=update.message.from_user.id).all()
         full_adm = False
         for adm in admin:
