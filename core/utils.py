@@ -50,7 +50,7 @@ def add_user(tg_user, session):
 
 
 def update_group(grp, session):
-    if grp.type in ['group', 'channel']:
+    if grp.type in ['group', 'supergroup', 'channel']:
         group = session.query(Group).filter_by(id=grp.id).first()
         if group is None:
             group = Group(id=grp.id, title=grp.title,
