@@ -71,7 +71,7 @@ def del_msg(bot, job):
 def manage_all(bot: Bot, update: Update, session):
     add_user(update.message.from_user, session)
     
-    if update.message.chat.type in ['group', 'channel']:
+    if update.message.chat.type in ['group', 'supergroup', 'channel']:
 
         if not update.message.text:
             return
