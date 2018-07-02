@@ -19,16 +19,17 @@ from core.chat_commands import CC_SET_WELCOME, CC_HELP, CC_SHOW_WELCOME, CC_TURN
     CC_ALLOW_PIN_ALL, CC_DISALLOW_PIN_ALL, \
     CC_PIN, CC_SILENT_PIN, CC_DELETE, CC_KICK
 
-
 from core.functions.admins import (
-    list_admins, admins_for_users, set_admin
+    list_admins, admins_for_users, set_admin, del_admin, set_global_admin,
+    set_super_admin, del_global_admin
+
 )
 from core.functions.ban import unban, ban
 
 
 from core.functions.common import (
-    help_msg, ping, start, error, kick, admin_panel,
-    delete_msg, delete_user, user_panel, web_auth)
+    help_msg, ping, error, kick, admin_panel,
+    delete_msg, delete_user, user_panel)
 
 
 from core.functions.pin import pin, not_pin_all, pin_all, silent_pin
@@ -43,7 +44,7 @@ from core.functions.welcome import (
 )
 
 
-from core.types import Admin, user_allowed, User
+from core.types import Admin, user_allowed
 from core.utils import add_user
 
 # -----constants----
@@ -67,16 +68,10 @@ def del_msg(bot, job):
 
 @run_async
 @user_allowed
-def manage_all(bot: Bot, update: Update, session, chat_data):
+def manage_all(bot: Bot, update: Update, session):
     add_user(update.message.from_user, session)
-
-    user = session.query(User).filter_by(id=update.message.from_user.id).first()
-
+    
     if update.message.chat.type in ['group', 'channel']:
-
-        admin = session.query(Admin).filter(
-            Admin.user_id == update.message.from_user.id and
-            Admin.admin_group in [update.message.chat.id, 0]).first()
 
         if not update.message.text:
             return
@@ -134,7 +129,14 @@ def manage_all(bot: Bot, update: Update, session, chat_data):
 # might need to remove elif statements below
 
     elif update.message.chat.type == 'private':
-        session.query(Admin).filter_by(user_id=update.message.from_user.id).all()
+            admin = session.query(Admin).filter_by(user_id=update.message.from_user.id).all()
+            is_admin = False
+            for _ in admin:
+                is_admin = True
+                break
+
+            if not is_admin:
+                user_panel(bot, update)
 
 
 def main():
@@ -163,11 +165,19 @@ def main():
     disp.add_handler(CommandHandler("disable_welcome", disable_welcome))
     disp.add_handler(CommandHandler("show_welcome", show_welcome))
     disp.add_handler(CommandHandler("add_admin", set_admin))
+    disp.add_handler(CommandHandler("add_global_admin", set_global_admin))
+    disp.add_handler(CommandHandler("del_global_admin", del_global_admin))
+    disp.add_handler(CommandHandler("add_super_admin", set_super_admin))
+    disp.add_handler(CommandHandler("del_admin", del_admin))
+    disp.add_handler(CommandHandler("list_admins", list_admins))
+    disp.add_handler(CommandHandler("kick", kick))
     disp.add_handler(CommandHandler("enable_trigger", enable_trigger_all))
     disp.add_handler(CommandHandler("disable_trigger", disable_trigger_all))
 
     disp.add_handler(CommandHandler("ban", ban))
     disp.add_handler(CommandHandler("unban", unban))
+
+
     # on noncommand i.e message - echo the message on Telegram
     disp.add_handler(MessageHandler(Filters.status_update, welcome))
     # disp.add_handler(MessageHandler(
