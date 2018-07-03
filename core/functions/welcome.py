@@ -17,11 +17,17 @@ def welcome(bot: Bot, update: Update, session):
     newbie(bot, update)
     global last_welcome
     print('welcome')
-    if update.message.chat.type in ['group']:
+    if update.message.chat.type in ['group', 'supergroup']:
         group = update_group(update.message.chat, session)
         for new_chat_member in update.message.new_chat_members:
             user = add_user(new_chat_member, session)
             print(user)
+            administrator = session.query(Admin).filter_by(user_id=user.id).all()
+            allow_anywhere = False
+            for adm in administrator:
+                if adm.admin_type == AdminType.FULL.value:
+                    allow_anywhere = True
+                    break
             print(update.message.chat.id)
             print(VENTURE_CHAT_ID == update.message.chat.id)
             if str(update.message.chat.id) == VENTURE_CHAT_ID:
@@ -30,7 +36,10 @@ def welcome(bot: Bot, update: Update, session):
                     print('enable_welcome')
                     welcome_msg = session.query(WelcomeMsg).filter_by(chat_id=group.id).first()
                     send_async(bot, chat_id=update.message.chat.id, text=fill_template(welcome_msg.message, user))
-
+            elif user is None and not allow_anywhere and user.id != bot.id:
+                send_async(bot, chat_id=update.message.chat.id)
+                bot.restrictChatMember(update.message.chat.id, new_chat_member.id)
+               
             else:
                 if group.welcome_enabled:
                     welcome_msg = session.query(WelcomeMsg).filter_by(chat_id=group.id).first()
@@ -52,7 +61,7 @@ def welcome(bot: Bot, update: Update, session):
 
 @admin_allowed(adm_type=AdminType.GROUP)
 def set_welcome(bot: Bot, update: Update, session):
-    if update.message.chat.type in ['group']:
+    if update.message.chat.type in ['group', 'supergroup']:
         group = update_group(update.message.chat, session)
         welcome_msg = session.query(WelcomeMsg).filter_by(chat_id=group.id).first()
         if welcome_msg is None:
@@ -66,7 +75,7 @@ def set_welcome(bot: Bot, update: Update, session):
 
 @admin_allowed(adm_type=AdminType.GROUP)
 def enable_welcome(bot: Bot, update: Update, session):
-    if update.message.chat.type in ['group']:
+    if update.message.chat.type in ['group', 'supergroup']:
         group = update_group(update.message.chat, session)
         group.welcome_enabled = True
         session.add(group)
@@ -76,7 +85,7 @@ def enable_welcome(bot: Bot, update: Update, session):
 
 @admin_allowed(adm_type=AdminType.GROUP)
 def disable_welcome(bot: Bot, update: Update, session):
-    if update.message.chat.type in ['group']:
+    if update.message.chat.type in ['group', 'supergroup']:
         group = update_group(update.message.chat, session)
         group.welcome_enabled = False
         session.add(group)
@@ -86,7 +95,7 @@ def disable_welcome(bot: Bot, update: Update, session):
 
 @admin_allowed(adm_type=AdminType.GROUP)
 def show_welcome(bot: Bot, update, session):
-    if update.message.chat.type in ['group']:
+    if update.message.chat.type in ['group', 'supergroup']:
         group = update_group(update.message.chat, session)
         welcome_msg = session.query(WelcomeMsg).filter_by(chat_id=group.id).first()
         if welcome_msg is None:
