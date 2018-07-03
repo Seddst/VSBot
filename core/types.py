@@ -189,7 +189,7 @@ def admin_allowed(adm_type=AdminType.FULL, ban_enable=True, allowed_types=()):
                 if ban_enable:
                     allowed &= check_ban(update, session)
                     if allowed:
-                        if func. __name__ not in ['manage_all', 'trigger_show', 'wrapper','welcome']:
+                        if func. __name__ not in ['manage_all', 'trigger_show', 'user_panel', 'wrapper','welcome']:
                             log(session, update.effective_user.id, update.effective_chat.id, func.__name__,
                                 update.message.text if update.message else None)
                         func(bot, update, session, *args, **kwargs)
