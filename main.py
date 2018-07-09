@@ -179,8 +179,8 @@ def main():
 
     # on noncommand i.e message - echo the message on Telegram
     # disp.add_handler(MessageHandler(Filters.status_update, welcome))
-    disp.add_handler(MessageHandler(
-        Filters.text))
+    # disp.add_handler(MessageHandler(
+    #    Filters.text))
     disp.add_handler(MessageHandler(
         Filters.all, manage_all))
 
