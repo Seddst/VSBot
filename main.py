@@ -178,7 +178,7 @@ def main():
     disp.add_handler(CommandHandler("unban", unban))
 
     # on noncommand i.e message - echo the message on Telegram
-    disp.add_handler(MessageHandler(Filters.status_update, welcome))
+    # disp.add_handler(MessageHandler(Filters.status_update, welcome))
     # disp.add_handler(MessageHandler(
     # Filters.text, manage_text, pass_chat_data=True))
     disp.add_handler(MessageHandler(
