@@ -7,7 +7,7 @@ from telegram import (
 )
 from telegram.ext import (
     Updater, CommandHandler, MessageHandler,
-    Filters
+    Filters, CallbackQueryHandler
 )
 from telegram.ext.dispatcher import run_async
 from telegram.error import TelegramError
@@ -183,12 +183,14 @@ def main():
     disp.add_handler(CommandHandler("ban", ban))
     disp.add_handler(CommandHandler("unban", unban))
 
+    disp.add_handler(CallbackQueryHandler(callback_query, pass_chat_data=True, pass_job_queue=True))
+    
     # on noncommand i.e message - echo the message on Telegram
-    disp.add_handler(MessageHandler(Filters.status_update))
+    disp.add_handler(MessageHandler(Filters.status_update, welcome))
     # disp.add_handler(MessageHandler(
     #    Filters.text))
     disp.add_handler(MessageHandler(
-        Filters.all, manage_all))
+        Filters.all, manage_all, pass_chat_data=True, pass_job_queue=True))
 
     # log all errors
     disp.add_error_handler(error)
