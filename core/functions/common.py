@@ -39,7 +39,7 @@ def admin_panel(bot: Bot, update: Update, session):
             if adm.admin_type <= AdminType.FULL.value:
                 full_adm = True
         send_async(bot, chat_id=update.message.chat.id, text=MSG_ADMIN_WELCOME,
-                   reply_markup=full_adm)
+                   parse_mode=ParseMode.HTML)
         
         
 @user_allowed
