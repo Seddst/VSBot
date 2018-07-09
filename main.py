@@ -17,7 +17,7 @@ from core.chat_commands import CC_SET_WELCOME, CC_HELP, CC_SHOW_WELCOME, CC_TURN
     CC_TURN_OFF_WELCOME, CC_SET_TRIGGER, CC_UNSET_TRIGGER, CC_TRIGGER_LIST, CC_ADMIN_LIST, CC_PING, \
     CC_ALLOW_TRIGGER_ALL, CC_DISALLOW_TRIGGER_ALL, CC_ADMINS, \
     CC_ALLOW_PIN_ALL, CC_DISALLOW_PIN_ALL, \
-    CC_PIN, CC_SILENT_PIN, CC_DELETE, CC_KICK
+    CC_PIN, CC_SILENT_PIN, CC_DELETE, CC_KICK, SHOW_ADMIN
 
 from core.functions.admins import (
     list_admins, admins_for_users, set_admin, del_admin, set_global_admin,
@@ -138,7 +138,7 @@ def manage_all(bot: Bot, update: Update, session):
             if update.message.text:
                text = update.message.text.lower()
 
-               if text == ADMIN_COMMAND_ADMINPANEL.lower():
+               if text == SHOW_ADMIN.lower():
                    admin_panel(bot, update)
                 
             if not is_admin:
