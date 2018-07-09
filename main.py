@@ -134,7 +134,13 @@ def manage_all(bot: Bot, update: Update, session):
             for _ in admin:
                 is_admin = True
                 break
+                
+            if update.message.text:
+               text = update.message.text.lower()
 
+               if text == ADMIN_COMMAND_ADMINPANEL.lower():
+                   admin_panel(bot, update)
+                
             if not is_admin:
                 user_panel(bot, update)
 
@@ -178,7 +184,7 @@ def main():
     disp.add_handler(CommandHandler("unban", unban))
 
     # on noncommand i.e message - echo the message on Telegram
-    # disp.add_handler(MessageHandler(Filters.status_update, welcome))
+    disp.add_handler(MessageHandler(Filters.status_update))
     # disp.add_handler(MessageHandler(
     #    Filters.text))
     disp.add_handler(MessageHandler(
