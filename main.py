@@ -182,7 +182,7 @@ def main():
     # disp.add_handler(MessageHandler(
     # Filters.text, manage_text, pass_chat_data=True))
     disp.add_handler(MessageHandler(
-        Filters.all, manage_all, pass_job_queue=True))
+        Filters.all, manage_all))
 
     # log all errors
     disp.add_error_handler(error)
